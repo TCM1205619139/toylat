@@ -14,9 +14,7 @@
   ],
   "host_permissions": [
     "https://www.baidu.com/",
-    "http://localhost/"
-  ],
-  "optional_host_permissions": [
+    "http://localhost/",
     "*://*/*"
   ],
   "options_page": "html/option.html",
