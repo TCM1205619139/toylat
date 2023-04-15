@@ -17,7 +17,7 @@ class Button extends React.Component<Partial<ButtonProps>, {}> {
   render () {
     const { children, disabled, onClick } = this.props
     return (
-      <div className="button-container">
+      <div className="button">
         <button
           className={this.styleClass.join(' ')}
           type="button"
