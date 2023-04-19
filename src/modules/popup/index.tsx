@@ -13,30 +13,34 @@ type State = {
 
 class App extends React.Component<{}, State> {
   state = {
-    visible: false
+    visible: false,
+    tableData: []
   }
   constructor (props: any) {
     super(props);
   }
   render() {
-    const { visible } = this.state
+    const { visible, tableData } = this.state
 
     return (
       <div className="app">
         <header>
-          <Button size="small" type="primary">新增配置</Button>
+          <Button size="small" type="primary" onClick={this.addNewProxyConfig.bind(this)}>新增配置</Button>
+          <Button type="primary" size="small">保存</Button>
           <ConfigModal
             visible={visible}
             onOk={this.onConfigModalOk.bind(this)}
             onCancel={this.onConfigModalCancel.bind(this)}
           />
         </header>
-        <ProxyStatusTable></ProxyStatusTable>
+        <section className="table-container">
+          <ProxyStatusTable tableData={tableData}></ProxyStatusTable>
+        </section>
       </div>
     )
   }
 
-  openAddConfigModal() {
+  addNewProxyConfig() {
     this.setState({
       visible: true
     })
