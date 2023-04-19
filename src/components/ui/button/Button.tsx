@@ -5,33 +5,41 @@ type ButtonProps = {
   disabled: boolean
   type: 'primary' | 'default' | 'dashed' | 'link',
   size: 'large' | 'middle' | 'small',
-  icon: string,
+  icon: JSX.Element,
   children: React.ReactNode,
-  onClick: () => void
+  className?: string,
+  svgString?: string,
+  [key: string]: any
 }
 
 class Button extends React.Component<Partial<ButtonProps>, {}> {
-  constructor (props: ButtonProps) {
-    super(props);
-  }
   render () {
-    const { children, disabled, onClick } = this.props
+    const {
+      children,
+      disabled,
+      onClick,
+      className = '',
+      svgString = ''
+    } = this.props
     return (
-      <div className="button">
+      <div className={`${className} button`}>
         <button
           className={this.styleClass.join(' ')}
           type="button"
           disabled={disabled}
           onClick={onClick}
         >
-          <span>{children}</span>
+          <div >
+            <div className="icon" dangerouslySetInnerHTML={{__html: svgString}}/>
+            <span>{children}</span>
+          </div>
         </button>
       </div>
     )
   }
 
   get styleClass() {
-    const { type = 'default', size = 'large', icon } = this.props
+    const { type = 'default', size = 'large' } = this.props
 
     return [`button-${type}`, `button-${size}`]
   }
