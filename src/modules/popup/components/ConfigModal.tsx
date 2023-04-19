@@ -1,60 +1,59 @@
 import React from 'react'
-import { ProxyConfigItem } from "@/modules/background/RequestProxy";
+import { Modal } from "@/components/ui";
+import { ProxyTable } from "@/index-db/proxy";
 
 type Props = {
   visible: boolean
   onOk: () => void
   onCancel: () => void
-  config?: ProxyConfigItem
+  config?: ProxyTable
 }
 
-type State = {
-  form: Partial<ProxyConfigItem>
-}
+const ConfigModal: React.FC<Props> = (props) => {
+  const title = !props.config
+    ? '新增配置'
+    : Object.keys(props.config || {}).length === 0
+      ? '新增配置'
+      : '编辑配置'
 
-const makeSelect = (list: string[]) => {
-  if (list.length === 0) return null
+  const onOk = () => {
+    props.onOk()
+  }
+
+  const onCancel = () => {
+    props.onCancel()
+  }
+
   return (
-    <div></div>
+    <Modal
+      visible={props.visible}
+      title={title}
+      onOk={onOk}
+      onCancel={onCancel}
+    >
+      <div style={{height: '200px', overflow: 'auto'}}><p>Some Content</p>
+        <p>Some Content</p>
+        <p>Some Content</p>
+        <p>Some Content</p>
+        <p>Some Content</p>
+        <p>Some Content</p>
+        <p>Some Content</p>
+        <p>Some Content</p>
+        <p>Some Content</p>
+        <p>Some Content</p>
+        <p>Some Content</p>
+        <p>Some Content</p>
+        <p>Some Content</p>
+        <p>Some Content</p>
+        <p>Some Content</p>
+        <p>Some Content</p>
+        <p>Some Content</p>
+        <p>Some Content</p>
+
+      </div>
+    </Modal>
   )
 }
 
-class ConfigModal extends React.Component<Props, State> {
-
-  constructor (props: any) {
-    super(props);
-    this.state = {
-      form: {}
-    }
-  }
-
-  render() {
-    const protocol = makeSelect([' http://', 'https://'])
-    const port = makeSelect(['8080', '8000'])
-
-    return (
-      <div></div>
-    )
-  }
-
-  get title() {
-    if (!this.props.config) return '新增配置'
-    return Object.keys(this.props.config).length === 0
-      ? '新增配置'
-      : '编辑配置'
-  }
-
-  onOk() {
-    this.setState({
-      form: {}
-    })
-  }
-
-  onCancel() {
-    this.setState({
-      form: {}
-    })
-  }
-}
 
 export default ConfigModal
